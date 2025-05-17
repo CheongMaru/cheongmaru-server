@@ -1,0 +1,29 @@
+services:
+  mysql:
+    image: mysql:8.0  # 사용할 MySQL 이미지 버전
+    container_name: cheongmaru-mysql  # 컨테이너 이름 지정
+    restart: always  # 컨테이너가 종료되면 항상 재시작
+    environment:
+      MYSQL_ROOT_PASSWORD: root1234       # root 계정 비밀번호
+      MYSQL_DATABASE: cheongmarudb        # 최초 생성할 DB 이름
+      MYSQL_USER: cheongmaru              # 일반 사용자 계정
+      MYSQL_PASSWORD: cheongmarupw        # 해당 계정의 비밀번호
+    ports:
+      - "3306:3306"  # 호스트의 3306 포트를 컨테이너 3306과 연결 (MySQL 기본 포트)
+    volumes:
+      - mysql_data:/var/lib/mysql  # DB 데이터를 컨테이너 외부에 저장 (데이터 보존)
+    networks:
+      - cheongmaru-net  # 사용자 정의 네트워크에 연결
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-ucheongmaru", "-pcheongmarupw"]
+      # MySQL이 제대로 작동 중인지 확인 (cheongmaru 계정으로 ping)
+      interval: 10s     # 10초마다 상태 체크
+      timeout: 5s       # 응답 없을 시 5초 뒤 실패로 판단
+      retries: 5        # 최대 5번 재시도 후 실패 처리
+
+volumes:
+  mysql_data:  # MySQL 데이터 저장용 볼륨
+
+networks:
+  cheongmaru-net:  # 백엔드 등 다른 서비스와 연결할 네트워크 정의
+    driver: bridge  # 기본 브리지 네트워크 사용
