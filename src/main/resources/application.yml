@@ -16,3 +16,16 @@ spring:
 
 server:
   port: 8080  # 애플리케이션이 실행될 포트
+
+
+jwt:
+  secret: OXJvb210b25fdW5pdi5jaHVuZ2J1a25hdGlvbmFsdW5pdmVyc2l0eS5wcm9qZWN0LnRlYW0x
+  expiration: 3600000  # 1시간 (단위: 밀리초)
+
+
+oauth:
+  kakao:
+    client-id: 594d8ec9028eac2ae44a733fcb3e7c52
+    redirect-uri: http://localhost:8080/api/auth/kakao
+    token-uri: https://kauth.kakao.com/oauth/token
+    user-info-uri: https://kapi.kakao.com/v2/user/me
