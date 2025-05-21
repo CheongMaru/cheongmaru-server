@@ -1,4 +1,4 @@
-package com.cheongmaru.global.auth;
+package com.cheongmaru.global.jwt;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;

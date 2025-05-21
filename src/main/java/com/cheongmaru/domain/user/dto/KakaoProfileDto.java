@@ -1,4 +1,4 @@
-package com.cheongmaru.user.dto;
+package com.cheongmaru.domain.user.dto;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;

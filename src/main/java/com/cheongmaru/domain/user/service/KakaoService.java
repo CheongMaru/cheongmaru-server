@@ -1,7 +1,7 @@
-package com.cheongmaru.user.service;
+package com.cheongmaru.domain.user.service;
 
-import com.cheongmaru.user.dto.AccessTokenDto;
-import com.cheongmaru.user.dto.KakaoProfileDto;
+import com.cheongmaru.domain.user.dto.AccessTokenDto;
+import com.cheongmaru.domain.user.dto.KakaoProfileDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*;

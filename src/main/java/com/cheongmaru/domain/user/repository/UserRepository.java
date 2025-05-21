@@ -1,6 +1,6 @@
-package com.cheongmaru.user.repository;
+package com.cheongmaru.domain.user.repository;
 
-import com.cheongmaru.user.domain.User;
+import com.cheongmaru.domain.user.domain.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

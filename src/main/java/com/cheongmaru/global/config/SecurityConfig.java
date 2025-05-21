@@ -1,6 +1,6 @@
 package com.cheongmaru.global.config;
 
-import com.cheongmaru.global.auth.JwtAuthenticationFilter;
+import com.cheongmaru.global.jwt.JwtAuthenticationFilter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -40,7 +40,8 @@ public class SecurityConfig {
                                 "/api/auth/**",         // 로그인/리프레시
                                 "/api/oauth2/**",
                                 "/swagger-ui/**",
-                                "/v3/api-docs/**"
+                                "/v3/api-docs/**",
+                                "/api/tags"
                         ).permitAll()
                         .anyRequest().authenticated()
                 )

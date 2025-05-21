@@ -1,15 +1,17 @@
-package com.cheongmaru.user.controller;
+package com.cheongmaru.domain.user.controller;
 
-import com.cheongmaru.global.auth.JwtTokenProvider;
-import com.cheongmaru.user.domain.User;
-import com.cheongmaru.user.dto.AccessTokenDto;
-import com.cheongmaru.user.dto.KakaoLoginRequest;
-import com.cheongmaru.user.dto.KakaoProfileDto;
-import com.cheongmaru.user.dto.LoginResponse;
-import com.cheongmaru.user.service.KakaoService;
-import com.cheongmaru.user.service.UserService;
+import com.cheongmaru.global.api.ApiResult;
+import com.cheongmaru.global.jwt.JwtTokenProvider;
+import com.cheongmaru.domain.user.domain.User;
+import com.cheongmaru.domain.user.dto.AccessTokenDto;
+import com.cheongmaru.domain.user.dto.KakaoLoginRequest;
+import com.cheongmaru.domain.user.dto.KakaoProfileDto;
+import com.cheongmaru.domain.user.dto.LoginResponse;
+import com.cheongmaru.domain.user.service.KakaoService;
+import com.cheongmaru.domain.user.service.UserService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api/auth")
+@Tag(name = "Auth", description = "인증 관련 API")
 @RequiredArgsConstructor
 public class UserController {
 
@@ -24,8 +27,12 @@ public class UserController {
     private final UserService userService;
     private final JwtTokenProvider jwtTokenProvider;
 
+    @Operation(
+            summary = "카카오 로그인",
+            description = "카카오 인가 코드를 통해 로그인하고 JWT 토큰을 반환합니다."
+    )
     @PostMapping("/kakao")
-    public ResponseEntity<LoginResponse> kakaoLogin(@RequestBody KakaoLoginRequest request) {
+    public ApiResult<LoginResponse> kakaoLogin(@RequestBody KakaoLoginRequest request) {
         // 1. 인가 코드 → 액세스 토큰 요청
         AccessTokenDto tokenDto = kakaoService.getAccessToken(request.getCode());
 
@@ -41,6 +48,6 @@ public class UserController {
 
         // 5. DTO 응답
         LoginResponse response = new LoginResponse(user.getId(), accessToken, refreshToken);
-        return ResponseEntity.ok(response);
+        return ApiResult.success(response);
     }
 }
