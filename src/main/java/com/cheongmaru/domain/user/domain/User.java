@@ -1,4 +1,4 @@
-package com.cheongmaru.user.domain;
+package com.cheongmaru.domain.user.domain;
 
 import jakarta.persistence.*;
 import lombok.*;

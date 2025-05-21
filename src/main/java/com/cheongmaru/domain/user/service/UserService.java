@@ -1,8 +1,8 @@
-package com.cheongmaru.user.service;
+package com.cheongmaru.domain.user.service;
 
-import com.cheongmaru.user.domain.User;
-import com.cheongmaru.user.dto.KakaoProfileDto;
-import com.cheongmaru.user.repository.UserRepository;
+import com.cheongmaru.domain.user.domain.User;
+import com.cheongmaru.domain.user.dto.KakaoProfileDto;
+import com.cheongmaru.domain.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

@@ -1,4 +1,4 @@
-package com.cheongmaru.user.dto;
+package com.cheongmaru.domain.user.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;

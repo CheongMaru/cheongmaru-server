@@ -1,4 +1,4 @@
-package com.cheongmaru.domain.tag;
+package com.cheongmaru.domain.tag.domain;
 
 import jakarta.persistence.*;
 import lombok.Getter;
