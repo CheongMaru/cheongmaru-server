@@ -1,3 +1,10 @@
+---
+name: Feature Request
+about: 새로운 기능을 제안합니다
+labels: feature
+assignees: ''
+---
+
 ## ✨ 작업 내용
 - (무슨 기능인지 한 줄 설명)
 

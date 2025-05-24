@@ -38,6 +38,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(
                                 "/api/auth/**",         // 로그인/리프레시
+                                "/api/dev-auth/**",     // 로그인 구현 시 삭제
                                 "/api/oauth2/**",
                                 "/swagger-ui/**",
                                 "/v3/api-docs/**",
