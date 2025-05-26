@@ -1,5 +1,7 @@
 package com.cheongmaru.global.jwt;
 
+import com.cheongmaru.domain.user.domain.User;
+import com.cheongmaru.domain.user.repository.UserRepository;
 import io.jsonwebtoken.Claims;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -22,6 +24,7 @@ import java.util.Collections;
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
     private final JwtTokenProvider jwtTokenProvider;
+    private final UserRepository userRepository;
 
     @Override
     protected void doFilterInternal(HttpServletRequest request,
@@ -39,11 +42,20 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                 String email = claims.getSubject();
                 String role = (String) claims.get("role");
 
-                var authorities = Collections.singletonList(new SimpleGrantedAuthority("ROLE_" + role));
+                // 실제 유저 객체 로드
+                User user = userRepository.findByEmail(email)
+                        .orElse(null); // orElseThrow 가능
 
-                var authentication = new UsernamePasswordAuthenticationToken(email, null, authorities);
-                authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
-                SecurityContextHolder.getContext().setAuthentication(authentication);
+                if (user != null) {
+                    var authorities = Collections.singletonList(
+                            new SimpleGrantedAuthority("ROLE_" + role)
+                    );
+
+                    var authentication = new UsernamePasswordAuthenticationToken(user, null, authorities);
+                    authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+
+                    SecurityContextHolder.getContext().setAuthentication(authentication);
+                }
             }
         }
 

@@ -9,7 +9,7 @@ services:
       MYSQL_USER: cheongmaru              # 일반 사용자 계정
       MYSQL_PASSWORD: cheongmarupw        # 해당 계정의 비밀번호
     ports:
-      - "3306:3306"  # 호스트의 3306 포트를 컨테이너 3306과 연결 (MySQL 기본 포트)
+      - "3307:3306"  # 호스트의 3306 포트를 컨테이너 3306과 연결 (MySQL 기본 포트)
     volumes:
       - mysql_data:/var/lib/mysql  # DB 데이터를 컨테이너 외부에 저장 (데이터 보존)
     networks:
