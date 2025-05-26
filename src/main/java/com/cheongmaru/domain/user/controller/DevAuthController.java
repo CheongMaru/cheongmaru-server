@@ -39,6 +39,6 @@ public class DevAuthController {
                     .build());
         }
 
-        return jwtTokenProvider.createToken(dummyEmail, dummyRole);
+        return jwtTokenProvider.createAccessToken(dummyEmail, dummyRole);
     }
 }

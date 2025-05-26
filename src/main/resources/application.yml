@@ -20,7 +20,8 @@ server:
 
 jwt:
   secret: OXJvb210b25fdW5pdi5jaHVuZ2J1a25hdGlvbmFsdW5pdmVyc2l0eS5wcm9qZWN0LnRlYW0x
-  expiration: 3600000  # 1시간 (단위: 밀리초)
+  access-expiration: 3600000  # 1시간 (단위: 밀리초)
+  refresh-expiration: 604800000   # 7일
 
 
 oauth:
