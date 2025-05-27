@@ -26,4 +26,9 @@ public class PostImage {
     public static PostImage create(Post post, String imgUrl) {
         return new PostImage(post, imgUrl);
     }
+
+    public String getImageUrl() {
+        return imgUrl;
+    }
+
 }
