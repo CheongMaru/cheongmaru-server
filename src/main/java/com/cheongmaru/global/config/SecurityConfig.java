@@ -41,7 +41,10 @@ public class SecurityConfig {
                                 "/api/dev-auth/**",     // 로그인 구현 시 삭제
                                 "/api/oauth2/**",
                                 "/swagger-ui/**",
+                                "/swagger-ui.html",         // 이게 빠져있어요! 추가 필요
                                 "/v3/api-docs/**",
+                                "/swagger-resources/**",    // Swagger 내부 의존 리소스
+                                "/webjars/**",              // 정적 자원 (JS, CSS)
                                 "/api/tags"
                         ).permitAll()
                         .anyRequest().authenticated()
@@ -53,7 +56,7 @@ public class SecurityConfig {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration config = new CorsConfiguration();
-        config.setAllowedOrigins(List.of("http://localhost:3000")); //보고 포트 다르게 할거면 수정 부탁드립니다.
+        config.setAllowedOrigins(List.of("http://localhost:3000", "http://localhost:8080"));
         config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         config.setAllowedHeaders(List.of("*"));
         config.setAllowCredentials(true);

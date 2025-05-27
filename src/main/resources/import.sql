@@ -26,3 +26,8 @@ INSERT INTO places (name, address, capacity, description, latitude, longitude) V
 INSERT INTO places (name, address, capacity, description, latitude, longitude) VALUES ('플랜에이 스터디카페 청주개신센터', '서원구 모충로 15', NULL, '플랜에이 스터디카페 청주개신센터는 충북대 근처에 위치한 학습 공간으로, 학생들에게 쾌적하고 집중력 있는 환경을 제공합니다. 다양한 좌석 옵션과 24시간 무인 운영 시스템을 갖추고 있어, 시간 제약 없이 자유롭게 이용할 수 있습니다. 또한, 전 좌석에 콘센트와 Wi-Fi가 제공되어 학습에 최적화된 환경을 조성하고 있습니다.', 36.625098, 127.465656);
 INSERT INTO places (name, address, capacity, description, latitude, longitude) VALUES ('공본스터디카페 청주사직센터', '서원구 사직동 936 2층', NULL, '공본스터디카페 청주사직센터는 사직동에 위치한 학습 공간으로, 학생들에게 쾌적하고 집중력 있는 환경을 제공합니다. 다양한 좌석 옵션과 24시간 무인 운영 시스템을 갖추고 있어, 시간 제약 없이 자유롭게 이용할 수 있습니다. 또한, 전 좌석에 콘센트와 Wi-Fi가 제공되어 학습에 최적화된 환경을 조성하고 있습니다.', 36.630614, 127.468055);
 INSERT INTO places (name, address, capacity, description, latitude, longitude) VALUES ('디플레이스 스터디카페 청주산남점', '서원구 산남동 659번지', NULL, '디플레이스 스터디카페 청주산남점은 산남동에 위치한 학습 공간으로, 학생들에게 쾌적하고 집중력 있는 환경을 제공합니다. 다양한 좌석 옵션과 24시간 무인 운영 시스템을 갖추고 있어, 시간 제약 없이 자유롭게 이용할 수 있습니다. 또한, 전 좌석에 콘센트와 Wi-Fi가 제공되어 학습에 최적화된 환경을 조성하고 있습니다.', 36.611271, 127.466549);
+
+INSERT INTO category (name) VALUES ('모집');
+INSERT INTO category (name) VALUES ('공고');
+INSERT INTO category (name) VALUES ('정보');
+INSERT INTO category (name) VALUES ('자유');
