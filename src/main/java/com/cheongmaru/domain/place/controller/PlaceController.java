@@ -1,7 +1,7 @@
 package com.cheongmaru.domain.place.controller;
 
 import com.cheongmaru.domain.place.service.PlaceService;
-import com.cheongmaru.domain.place.service.dto.PlaceDto;
+import com.cheongmaru.domain.place.dto.PlaceDto;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

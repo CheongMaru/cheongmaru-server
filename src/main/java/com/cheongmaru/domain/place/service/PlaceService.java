@@ -1,7 +1,7 @@
 package com.cheongmaru.domain.place.service;
 
 import com.cheongmaru.domain.place.repository.PlaceRepository;
-import com.cheongmaru.domain.place.service.dto.PlaceDto;
+import com.cheongmaru.domain.place.dto.PlaceDto;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,7 +17,8 @@ public class PlaceService {
 
     public List<PlaceDto> getAllPlaces() {
         return repo.findAll().stream()
-                .map(p -> new PlaceDto(p.getId(), p.getName(), p.getAddress()))
+                .map(PlaceDto::fromEntity)
                 .collect(Collectors.toList());
     }
+
 }
