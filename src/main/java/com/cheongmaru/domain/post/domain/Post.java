@@ -36,8 +36,8 @@ public class Post {
     @Column(name = "view_count")
     private int viewCount;
 
-    @Column(name = "post_count")
-    private int postCount;
+    @Column(name = "like_count")
+    private int likeCount;
 
     @Column(name = "created_at", nullable = false)
     private LocalDateTime createdAt;
@@ -53,7 +53,7 @@ public class Post {
         this.title = title;
         this.content = content;
         this.viewCount = 0;
-        this.postCount = 0;
+        this.likeCount = 0;
         this.createdAt = LocalDateTime.now();
     }
 
@@ -78,6 +78,17 @@ public class Post {
         this.content = content;
     }
 
+    // 조회수 증가
+    public void increaseViewCount() {
+        this.viewCount += 1;
+    }
+
+    // 이미지 URL 리스트 반환
+    public List<String> getImageUrls() {
+        return images.stream()
+                .map(PostImage::getImageUrl)
+                .toList();
+    }
 
 }
 
