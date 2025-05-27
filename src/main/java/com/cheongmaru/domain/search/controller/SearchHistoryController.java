@@ -4,6 +4,7 @@ import com.cheongmaru.domain.search.dto.SearchHistoryResponse;
 import com.cheongmaru.domain.search.dto.SearchHistorySaveRequest;
 import com.cheongmaru.domain.search.service.SearchHistoryService;
 import com.cheongmaru.global.api.ApiResult;
+import com.cheongmaru.global.auth.CustomUserDetails;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
@@ -22,22 +23,25 @@ public class SearchHistoryController {
 
     @Operation(summary = "검색 기록 저장")
     @PostMapping
-    public ApiResult<Void> save(@AuthenticationPrincipal String userId,
+    public ApiResult<Void> save(@AuthenticationPrincipal CustomUserDetails userDetails,
                                 @RequestBody SearchHistorySaveRequest request) {
+        String userId = userDetails.getUser().getId().toString();
         searchHistoryService.save(userId, request);
         return ApiResult.success(null);
     }
 
     @Operation(summary = "검색 기록 전체 조회")
     @GetMapping
-    public ApiResult<List<SearchHistoryResponse>> getAll(@AuthenticationPrincipal String userId) {
+    public ApiResult<List<SearchHistoryResponse>> getAll(@AuthenticationPrincipal CustomUserDetails userDetails) {
+        String userId = userDetails.getUser().getId().toString();
         return ApiResult.success(searchHistoryService.getAll(userId));
     }
 
     @Operation(summary = "검색 기록 단건 삭제")
     @DeleteMapping("/{id}")
     public ApiResult<Void> deleteOne(@PathVariable Long id,
-                                     @AuthenticationPrincipal String userId) {
+                                     @AuthenticationPrincipal CustomUserDetails userDetails) {
+        String userId = userDetails.getUser().getId().toString();
         searchHistoryService.deleteById(id, userId);
         return ApiResult.success(null);
     }

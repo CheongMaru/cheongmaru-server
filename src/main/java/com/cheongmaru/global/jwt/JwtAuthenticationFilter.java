@@ -2,6 +2,7 @@ package com.cheongmaru.global.jwt;
 
 import com.cheongmaru.domain.user.domain.User;
 import com.cheongmaru.domain.user.repository.UserRepository;
+import com.cheongmaru.global.auth.CustomUserDetails;
 import io.jsonwebtoken.Claims;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -42,21 +43,21 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                 String email = claims.getSubject();
                 String role = (String) claims.get("role");
 
-                // 실제 유저 객체 로드
-                User user = userRepository.findByEmail(email)
-                        .orElse(null); // orElseThrow 가능
-
+                User user = userRepository.findByEmail(email).orElse(null);
                 if (user != null) {
+                    var userDetails = new CustomUserDetails(user);
+
                     var authorities = Collections.singletonList(
                             new SimpleGrantedAuthority("ROLE_" + role)
                     );
 
-                    var authentication = new UsernamePasswordAuthenticationToken(user.getId(), null, authorities);
+                    var authentication = new UsernamePasswordAuthenticationToken(userDetails, null, authorities);
                     authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
 
                     SecurityContextHolder.getContext().setAuthentication(authentication);
                 }
             }
+
         }
 
         filterChain.doFilter(request, response);
