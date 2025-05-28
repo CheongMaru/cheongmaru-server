@@ -1,10 +1,12 @@
 package com.cheongmaru.domain.place.repository;
 
-import com.cheongmaru.domain.place.domain.Place;       // 엔티티 패키지 경로 확인!
+import com.cheongmaru.domain.place.domain.Place;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
 
-@Repository
+import java.util.List;
+
 public interface PlaceRepository extends JpaRepository<Place, Long> {
-    // JpaRepository를 상속하면 findAll()이 자동으로 제공됩니다.
+
+    // 특정 태그 이름으로 장소들을 조회하는 메서드
+    List<Place> findByTags_Name(String tagName);
 }
