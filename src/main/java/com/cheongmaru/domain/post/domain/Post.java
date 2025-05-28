@@ -83,12 +83,25 @@ public class Post {
         this.viewCount += 1;
     }
 
+    // 좋아요 수 증가
+    public void increaseLikeCount() {
+        this.likeCount += 1;
+    }
+
+    // 좋아요 수 감소
+    public void decreaseLikeCount() {
+        if (this.likeCount > 0) {
+            this.likeCount -= 1;
+        }
+    }
+
     // 이미지 URL 리스트 반환
     public List<String> getImageUrls() {
         return images.stream()
                 .map(PostImage::getImageUrl)
                 .toList();
     }
+
 
 }
 
