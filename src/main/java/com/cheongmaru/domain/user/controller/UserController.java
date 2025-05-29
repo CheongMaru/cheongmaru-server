@@ -5,6 +5,7 @@ import com.cheongmaru.domain.user.dto.*;
 import com.cheongmaru.global.api.ApiResult;
 import com.cheongmaru.domain.user.service.KakaoService;
 import com.cheongmaru.domain.user.service.UserService;
+import com.cheongmaru.global.auth.CustomUserDetails;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
@@ -50,6 +51,14 @@ public class UserController {
     public ApiResult<?> logout(@AuthenticationPrincipal User user) {
         userService.logout(user.getId());
         return ApiResult.success("로그아웃 완료");
+    }
+
+    @Operation(summary = "내 정보 조회", description = "현재 로그인한 사용자의 정보를 반환합니다.")
+    @GetMapping("/me")
+    public ApiResult<UserResponseDto> getMyInfo(@AuthenticationPrincipal CustomUserDetails userDetails) {
+        User user = userDetails.getUser();
+        UserResponseDto response = new UserResponseDto(user.getId(), user.getEmail(), user.getNickname());
+        return ApiResult.success(response);
     }
 
 }
