@@ -39,6 +39,9 @@ public class Post {
     @Column(name = "like_count")
     private int likeCount;
 
+    @Column(name = "comment_count")
+    private int commentCount;
+
     @Column(name = "created_at", nullable = false)
     private LocalDateTime createdAt;
 
@@ -92,6 +95,18 @@ public class Post {
     public void decreaseLikeCount() {
         if (this.likeCount > 0) {
             this.likeCount -= 1;
+        }
+    }
+
+    // 댓글 수 증가
+    public void increaseCommentCount() {
+        this.commentCount++;
+    }
+
+    // 댓글 수 감소
+    public void decreaseCommentCount() {
+        if (this.commentCount > 0) {
+            this.commentCount--;
         }
     }
 

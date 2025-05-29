@@ -7,6 +7,8 @@ import com.cheongmaru.domain.post.repository.PostLikeRepository;
 import com.cheongmaru.domain.post.repository.PostRepository;
 import com.cheongmaru.domain.user.domain.User;
 import com.cheongmaru.domain.user.repository.UserRepository;
+import com.cheongmaru.global.exception.CustomException;
+import com.cheongmaru.global.exception.ErrorCode;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -23,12 +25,12 @@ public class PostLikeService {
 
     private User getUserByEmail(String email) {
         return userRepository.findByEmail(email)
-                .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 사용자입니다."));
+                .orElseThrow(() -> new CustomException(ErrorCode.USER_NOT_FOUND));
     }
 
     private Post getPostById(Long postId) {
         return postRepository.findById(postId)
-                .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 게시글입니다."));
+                .orElseThrow(() -> new CustomException(ErrorCode.POST_NOT_FOUND));
     }
 
     /**
@@ -64,7 +66,7 @@ public class PostLikeService {
     /**
      * 내가 좋아요한 게시글 조회
      */
-    @Transactional
+    @Transactional(Transactional.TxType.SUPPORTS)
     public List<PostResponse> getLikedPosts(String email) {
         User user = getUserByEmail(email);
 

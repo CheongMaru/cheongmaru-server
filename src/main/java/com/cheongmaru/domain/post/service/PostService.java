@@ -9,6 +9,8 @@ import com.cheongmaru.domain.post.dto.PostResponse;
 import com.cheongmaru.domain.post.repository.PostRepository;
 import com.cheongmaru.domain.user.domain.User;
 import com.cheongmaru.domain.user.repository.UserRepository;
+import com.cheongmaru.global.exception.CustomException;
+import com.cheongmaru.global.exception.ErrorCode;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -25,17 +27,17 @@ public class PostService {
 
     private User getUserByEmail(String email) {
         return userRepository.findByEmail(email)
-                .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 사용자입니다."));
+                .orElseThrow(() -> new CustomException(ErrorCode.USER_NOT_FOUND));
     }
 
     private Category getCategoryById(Long categoryId) {
         return categoryRepository.findById(categoryId)
-                .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 카테고리입니다."));
+                .orElseThrow(() -> new CustomException(ErrorCode.CATEGORY_NOT_FOUND));
     }
 
     private Post getPostById(Long postId) {
         return postRepository.findById(postId)
-                .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 게시글입니다."));
+                .orElseThrow(() -> new CustomException(ErrorCode.POST_NOT_FOUND));
     }
 
     /**
@@ -64,7 +66,7 @@ public class PostService {
         Post post = getPostById(postId);
 
         if (!post.getUser().equals(user)) {
-            throw new SecurityException("해당 게시글에 대한 수정 권한이 없습니다.");
+            throw new CustomException(ErrorCode.FORBIDDEN);
         }
 
         Category category = getCategoryById(request.getCategoryId());
@@ -86,7 +88,7 @@ public class PostService {
         Post post = getPostById(postId);
 
         if (!post.getUser().equals(user)) {
-            throw new SecurityException("해당 게시글에 대한 삭제 권한이 없습니다.");
+            throw new CustomException(ErrorCode.FORBIDDEN);
         }
 
         postRepository.delete(post);
@@ -96,7 +98,7 @@ public class PostService {
     /**
      * 전체 게시글 목록 조회
      */
-    @Transactional
+    @Transactional(Transactional.TxType.SUPPORTS)
     public List<PostResponse> getAllPosts() {
         return postRepository.findAllByOrderByCreatedAtDesc()
                 .stream()
@@ -107,7 +109,7 @@ public class PostService {
     /**
      * 카테고리별 게시글 목록 조회
      */
-    @Transactional
+    @Transactional(Transactional.TxType.SUPPORTS)
     public List<PostResponse> getPostsByCategory(Long categoryId) {
         Category category = getCategoryById(categoryId);
 
@@ -120,10 +122,10 @@ public class PostService {
     /**
      * 게시글 검색 (제목 or 내용)
      */
-    @Transactional
+    @Transactional(Transactional.TxType.SUPPORTS)
     public List<PostResponse> searchPosts(String query) {
         if (query == null || query.trim().isEmpty()) {
-            throw new IllegalArgumentException("검색어를 입력해주세요.");
+            throw new CustomException(ErrorCode.INVALID_INPUT_VALUE);
         }
 
         return postRepository
@@ -153,5 +155,4 @@ public class PostService {
                 .createdAt(post.getCreatedAt())
                 .build();
     }
-
 }
