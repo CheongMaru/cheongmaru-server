@@ -1,12 +1,12 @@
 package com.cheongmaru.domain.tag.service;
 
 import com.cheongmaru.domain.tag.domain.Tag;
+import com.cheongmaru.domain.tag.dto.TagDto;
 import com.cheongmaru.domain.tag.repository.TagRepository;
-import com.cheongmaru.global.exception.CustomException;
-import com.cheongmaru.global.exception.ErrorCode;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class TagService {
@@ -17,11 +17,10 @@ public class TagService {
         this.tagRepository = tagRepository;
     }
 
-    public List<Tag> getAllTags() {
-        List<Tag> tags = tagRepository.findAll();
-        if (tags == null || tags.isEmpty()) {
-            throw new CustomException(ErrorCode.TAG_NOT_FOUND);
-        }
-        return tags;
+    public List<TagDto> getAllTags() {
+        return tagRepository.findAll()
+                .stream()
+                .map(TagDto::fromEntity)
+                .collect(Collectors.toList());
     }
 }

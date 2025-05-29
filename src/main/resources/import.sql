@@ -31,3 +31,17 @@ INSERT INTO category (name) VALUES ('모집');
 INSERT INTO category (name) VALUES ('공고');
 INSERT INTO category (name) VALUES ('정보');
 INSERT INTO category (name) VALUES ('자유');
+
+
+-- 태그 데이터 삽입
+INSERT INTO tag (id, name) VALUES (1, '도서관');
+INSERT INTO tag (id, name) VALUES (2, '공유 오피스');
+INSERT INTO tag (id, name) VALUES (3, '스터디 카페');
+INSERT INTO tag (id, name) VALUES (4, '청년 지원 기관');
+INSERT INTO tag (id, name) VALUES (5, '창업지원');
+INSERT INTO tag (id, name) VALUES (6, '취업지원');
+INSERT INTO tag (id, name) VALUES (7, '문화공간');
+
+
+-- 다대다 중간 테이블 연결 임시
+INSERT INTO place_tag (place_id, tag_id) VALUES (1, 1);
