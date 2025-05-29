@@ -74,5 +74,10 @@ public class UserService {
         refreshTokenRepository.deleteByUserId(userId);
     }
 
+    // 내 정보 조회
+    public User getMyInfo(String userId) {
+        return userRepository.findById(userId)
+                .orElseThrow(() -> new IllegalArgumentException("사용자를 찾을 수 없습니다."));
+    }
 
 }
