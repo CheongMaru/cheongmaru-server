@@ -16,6 +16,7 @@ public class PostResponse {
     private LocalDateTime createdAt;
     private int viewCount;
     private int likeCount;
+    private int commentCount;
 
     public static PostResponse from(Post post) {
         return PostResponse.builder()
@@ -26,6 +27,7 @@ public class PostResponse {
                 .createdAt(post.getCreatedAt())
                 .viewCount(post.getViewCount())
                 .likeCount(post.getLikeCount())
+                .commentCount(post.getCommentCount())
                 .build();
     }
 }
