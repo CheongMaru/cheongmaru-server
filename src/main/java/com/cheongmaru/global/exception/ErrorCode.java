@@ -17,6 +17,8 @@ public enum ErrorCode {
 
     // 403 FORBIDDEN
     FORBIDDEN(HttpStatus.FORBIDDEN, "권한이 없습니다."),
+    LOCATION_NOT_CERTIFIABLE(HttpStatus.FORBIDDEN, "해당 위치는 청주가 아닙니다."),
+
 
     // 404 NOT FOUND
     USER_NOT_FOUND(HttpStatus.NOT_FOUND,  "사용자를 찾을 수 없습니다."),
