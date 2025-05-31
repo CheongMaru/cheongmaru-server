@@ -43,5 +43,100 @@ INSERT INTO tag (id, name) VALUES (6, '취업지원');
 INSERT INTO tag (id, name) VALUES (7, '문화공간');
 
 
--- 다대다 중간 테이블 연결 임시
-INSERT INTO place_tag (place_id, tag_id) VALUES (1, 1);
+-- 다대다 중간 테이블 연결
+-- 1. 충북청년희망센터 → 태그 “청년 지원 기관”(4), “창업지원”(5), “취업지원”(6)
+INSERT INTO place_tag (place_id, tag_id) VALUES ((SELECT id FROM places WHERE name = '충북청년희망센터'), 4);
+INSERT INTO place_tag (place_id, tag_id) VALUES ((SELECT id FROM places WHERE name = '충북청년희망센터'), 5);
+INSERT INTO place_tag (place_id, tag_id) VALUES ((SELECT id FROM places WHERE name = '충북청년희망센터'), 6);
+
+-- 2. 청주시립도서관 동아리교실 → 태그 “도서관”(1)
+INSERT INTO place_tag (place_id, tag_id) VALUES ((SELECT id FROM places WHERE name = '청주시립도서관 동아리교실'), 1);
+
+-- 3. 청주오창호수도서관 → 태그 “도서관”(1)
+INSERT INTO place_tag (place_id, tag_id) VALUES ((SELECT id FROM places WHERE name = '청주오창호수도서관'), 1);
+
+-- 4. 청주오창도서관 → 태그 “도서관”(1)
+INSERT INTO place_tag (place_id, tag_id) VALUES ((SELECT id FROM places WHERE name = '청주오창도서관'), 1);
+
+-- 5. 금빛도서관 → 태그 “도서관”(1)
+INSERT INTO place_tag (place_id, tag_id) VALUES ((SELECT id FROM places WHERE name = '금빛도서관'), 1);
+
+-- 6. 오송도서관 → 태그 “도서관”(1)
+INSERT INTO place_tag (place_id, tag_id) VALUES ((SELECT id FROM places WHERE name = '오송도서관'), 1);
+
+-- 7. 서원도서관 → 태그 “도서관”(1)
+INSERT INTO place_tag (place_id, tag_id) VALUES ((SELECT id FROM places WHERE name = '서원도서관'), 1);
+
+-- 8. 가로수도서관 → 태그 “도서관”(1)
+INSERT INTO place_tag (place_id, tag_id) VALUES ((SELECT id FROM places WHERE name = '가로수도서관'), 1);
+
+-- 9. 충북창조경제혁신센터 → 태그 “청년 지원 기관”(4), “창업지원”(5)
+INSERT INTO place_tag (place_id, tag_id) VALUES ((SELECT id FROM places WHERE name = '충북창조경제혁신센터'), 4);
+INSERT INTO place_tag (place_id, tag_id) VALUES ((SELECT id FROM places WHERE name = '충북창조경제혁신센터'), 5);
+
+-- 10. 청년뜨락5959 → 태그 “청년 지원 기관”(4), “창업지원”(5), “취업지원”(6)
+INSERT INTO place_tag (place_id, tag_id) VALUES ((SELECT id FROM places WHERE name = '청년뜨락5959'), 4);
+INSERT INTO place_tag (place_id, tag_id) VALUES ((SELECT id FROM places WHERE name = '청년뜨락5959'), 5);
+INSERT INTO place_tag (place_id, tag_id) VALUES ((SELECT id FROM places WHERE name = '청년뜨락5959'), 6);
+
+-- 11. 대현지하상가 → 태그 “청년 지원 기관”(4), “창업지원”(5), “문화공간”(7)
+INSERT INTO place_tag (place_id, tag_id) VALUES ((SELECT id FROM places WHERE name = '대현지하상가'), 4);
+INSERT INTO place_tag (place_id, tag_id) VALUES ((SELECT id FROM places WHERE name = '대현지하상가'), 5);
+INSERT INTO place_tag (place_id, tag_id) VALUES ((SELECT id FROM places WHERE name = '대현지하상가'), 7);
+
+-- 12. 청년문화창작소 느티 → 태그 “청년 지원 기관”(4), “문화공간”(7)
+INSERT INTO place_tag (place_id, tag_id) VALUES ((SELECT id FROM places WHERE name = '청년문화창작소 느티'), 4);
+INSERT INTO place_tag (place_id, tag_id) VALUES ((SELECT id FROM places WHERE name = '청년문화창작소 느티'), 7);
+
+-- 13. 청년꿈제작소 → 태그 “청년 지원 기관”(4), “문화공간”(7)
+INSERT INTO place_tag (place_id, tag_id) VALUES ((SELECT id FROM places WHERE name = '청년꿈제작소'), 4);
+INSERT INTO place_tag (place_id, tag_id) VALUES ((SELECT id FROM places WHERE name = '청년꿈제작소'), 7);
+
+-- 14. 청춘잡담 → 태그 “청년 지원 기관”(4), “취업지원”(6), “문화공간”(7)
+INSERT INTO place_tag (place_id, tag_id) VALUES ((SELECT id FROM places WHERE name = '청춘잡담'), 4);
+INSERT INTO place_tag (place_id, tag_id) VALUES ((SELECT id FROM places WHERE name = '청춘잡담'), 6);
+INSERT INTO place_tag (place_id, tag_id) VALUES ((SELECT id FROM places WHERE name = '청춘잡담'), 7);
+
+-- 15. 청주테크노s타워 → 태그 “공유 오피스”(2), “창업지원”(5)
+INSERT INTO place_tag (place_id, tag_id) VALUES ((SELECT id FROM places WHERE name = '청주테크노s타워'), 2);
+INSERT INTO place_tag (place_id, tag_id) VALUES ((SELECT id FROM places WHERE name = '청주테크노s타워'), 5);
+
+-- 16. 더공감 공유오피스 → 태그 “공유 오피스”(2)
+INSERT INTO place_tag (place_id, tag_id) VALUES ((SELECT id FROM places WHERE name = '더공감 공유오피스'), 2);
+
+-- 17. 공유오피스 아반 → 태그 “공유 오피스”(2)
+INSERT INTO place_tag (place_id, tag_id) VALUES ((SELECT id FROM places WHERE name = '공유오피스 아반'), 2);
+
+-- 18. 에이플 충북대 중문 스터디 카페 → 태그 “스터디 카페”(3)
+INSERT INTO place_tag (place_id, tag_id) VALUES ((SELECT id FROM places WHERE name = '에이플 충북대 중문 스터디 카페'), 3);
+
+-- 19. 위넌스터디카페 충북대점 → 태그 “스터디 카페”(3)
+INSERT INTO place_tag (place_id, tag_id) VALUES ((SELECT id FROM places WHERE name = '위넌스터디카페 충북대점'), 3);
+
+-- 20. 에코플러스 스터디카페 → 태그 “스터디 카페”(3)
+INSERT INTO place_tag (place_id, tag_id) VALUES ((SELECT id FROM places WHERE name = '에코플러스 스터디카페'), 3);
+
+-- 21. 하우스터디 청주사창센터 스터디카페 → 태그 “스터디 카페”(3)
+INSERT INTO place_tag (place_id, tag_id) VALUES ((SELECT id FROM places WHERE name = '하우스터디 청주사창센터 스터디카페'), 3);
+
+-- 22. 별하스터디카페 → 태그 “스터디 카페”(3)
+INSERT INTO place_tag (place_id, tag_id) VALUES ((SELECT id FROM places WHERE name = '별하스터디카페'), 3);
+
+-- 23. 어반트리 스터디카페 봉명운천센터 → 태그 “스터디 카페”(3)
+INSERT INTO place_tag (place_id, tag_id) VALUES ((SELECT id FROM places WHERE name = '어반트리 스터디카페 봉명운천센터'), 3);
+
+-- 24. 어라운드 스터디카페 청주사직점 → 태그 “스터디 카페”(3)
+INSERT INTO place_tag (place_id, tag_id) VALUES ((SELECT id FROM places WHERE name = '어라운드 스터디카페 청주사직점'), 3);
+
+-- 25. 위드스터디카페 청주대점 → 태그 “스터디 카페”(3)
+INSERT INTO place_tag (place_id, tag_id) VALUES ((SELECT id FROM places WHERE name = '위드스터디카페 청주대점'), 3);
+
+-- 26. 플랜에이 스터디카페 청주개신센터 → 태그 “스터디 카페”(3)
+INSERT INTO place_tag (place_id, tag_id) VALUES ((SELECT id FROM places WHERE name = '플랜에이 스터디카페 청주개신센터'), 3);
+
+-- 27. 공본스터디카페 청주사직센터 → 태그 “스터디 카페”(3)
+INSERT INTO place_tag (place_id, tag_id) VALUES ((SELECT id FROM places WHERE name = '공본스터디카페 청주사직센터'), 3);
+
+-- 28. 디플레이스 스터디카페 청주산남점 → 태그 “스터디 카페”(3)
+INSERT INTO place_tag (place_id, tag_id) VALUES ((SELECT id FROM places WHERE name = '디플레이스 스터디카페 청주산남점'), 3);
+
