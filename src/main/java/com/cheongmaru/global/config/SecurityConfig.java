@@ -41,11 +41,10 @@ public class SecurityConfig {
                                 "/api/dev-auth/**",     // 로그인 구현 시 삭제
                                 "/api/oauth2/**",
                                 "/swagger-ui/**",
-                                "/swagger-ui.html",         // 이게 빠져있어요! 추가 필요
+                                "/swagger-ui.html",
                                 "/v3/api-docs/**",
                                 "/swagger-resources/**",    // Swagger 내부 의존 리소스
-                                "/webjars/**",              // 정적 자원 (JS, CSS)
-                                "/api/tags"
+                                "/webjars/**"               // 정적 자원 (JS, CSS)
                         ).permitAll()
                         .anyRequest().authenticated()
                 )
@@ -56,7 +55,11 @@ public class SecurityConfig {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration config = new CorsConfiguration();
-        config.setAllowedOrigins(List.of("http://localhost:3000", "http://localhost:8080"));
+        config.setAllowedOrigins(List.of(
+                "http://localhost:3000",      // 프론트엔드 웹
+                "http://localhost:8080",      // 테스트용 백엔드 접근
+                "http://10.0.2.2:8080"        // 안드로이드 에뮬레이터에서 백엔드 접근
+        ));
         config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         config.setAllowedHeaders(List.of("*"));
         config.setAllowCredentials(true);
@@ -65,4 +68,5 @@ public class SecurityConfig {
         source.registerCorsConfiguration("/**", config);
         return source;
     }
+
 }
