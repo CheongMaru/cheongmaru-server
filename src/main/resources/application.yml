@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: jdbc:mysql://localhost:3306/cheongmarudb # docker-compose 내 mysql 서비스와 연결
+    url: jdbc:mysql://localhost:3306/cheongmarudb?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Seoul
     username: cheongmaru                      # MySQL 사용자 이름
     password: cheongmarupw                    # MySQL 비밀번호
     driver-class-name: com.mysql.cj.jdbc.Driver # MySQL 드라이버 클래스
