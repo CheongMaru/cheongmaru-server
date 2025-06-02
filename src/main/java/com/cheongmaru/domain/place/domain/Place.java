@@ -25,6 +25,9 @@ public class Place {
     private double latitude;         // 위도
     private double longitude;        // 경도
 
+    @Column(length = 500, nullable = true) // <-- 이 부분을 추가합니다.
+    private String link; // <-- 이 부분을 추가합니다.
+
     @ManyToMany
     @JoinTable(
             name = "place_tag",
@@ -35,15 +38,17 @@ public class Place {
 
     protected Place() {}
 
-    public Place(String name, String address, Integer capacity, String description, double latitude, double longitude) {
+    public Place(String name, String address, Integer capacity, String description, double latitude, double longitude, String link) { // <-- 생성자에도 link 추가
         this.name = name;
         this.address = address;
         this.capacity = capacity;
         this.description = description;
         this.latitude = latitude;
         this.longitude = longitude;
+        this.link = link; // <-- 이 부분을 추가합니다.
     }
 
+    // 기존 Getter들
     public Long getId() { return id; }
     public String getName() { return name; }
     public String getAddress() { return address; }
@@ -51,5 +56,6 @@ public class Place {
     public String getDescription() { return description; }
     public double getLatitude() { return latitude; }
     public double getLongitude() { return longitude; }
+    public String getLink() { return link; } // <-- link getter 추가
     public List<Tag> getTags() { return tags; }
 }
